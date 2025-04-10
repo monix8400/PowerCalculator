@@ -1,27 +1,17 @@
 import streamlit as st
 from datetime import datetime
 
-# Funcție pentru a converti string în dată
-def format_date(date_string):
-    try:
-        return datetime.strptime(date_string, "%d/%m/%Y")
-    except ValueError:
-        return None
-
 # Titlu aplicație
 st.title("Power Consumption Calculator")
 
 # Inputuri de la utilizator
-begin_date_str = st.text_input("Enter the begin date (DD/MM/YYYY):", "")
-between_date_str = st.text_input("Enter the between date (DD/MM/YYYY):", "")
-end_date_str = st.text_input("Enter the end date (DD/MM/YYYY):", "")
+begin_date = st.date_input("Enter the begin date:", value=None)
+between_date = st.date_input("Enter the between date:", value=None)
+end_date = st.date_input("Enter the end date:", value=None)
 total_kwh = st.number_input("Enter the total power consumption in kWh over the entire period:", min_value=0.0, format="%.2f")
 
 # Buton de calcul
 if st.button("Calculate"):
-    begin_date = format_date(begin_date_str)
-    between_date = format_date(between_date_str)
-    end_date = format_date(end_date_str)
 
     if not begin_date or not between_date or not end_date:
         st.error("Please enter the dates in the correct format (DD/MM/YYYY).")
